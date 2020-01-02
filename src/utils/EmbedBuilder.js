@@ -31,6 +31,7 @@ const Colors = {
   GREYPLE: 0x99AAB5,
   DARK_BUT_NOT_BLACK: 0x2C2F33,
   NOT_QUITE_BLACK: 0x23272A,
+  YELLOW: 0xffff00,
 };
 const isObject = d => typeof d === 'object' && d !== null;
 const Flatten = (obj, ...props) => {
