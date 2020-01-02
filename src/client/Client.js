@@ -23,6 +23,7 @@ const Message = require('../models/Message');
  */
 
 class Client extends EventEmitter {
+  
   constructor(options = {}) {
     super(options);
     this.shardCount = options.shardCount || 1;
@@ -139,7 +140,40 @@ class Client extends EventEmitter {
    * @param {String} content The content to send
    * @returns {Promise<Message>}
    */
-
+  
+  send(channel, content) {
+     return this.createMessage(channel, content);
+  }
+  
+  /**
+   * Creates a message to a channel
+   * @param {Snowflake} channel The id of the channel to send a message to
+   * @param {String} content The content to send
+   * @returns {Promise<Message>}
+   */
+  
+  sendMessage(channel, content) {
+     return this.createMessage(channel, content);
+  }
+  
+  /**
+   * Creates a message to a channel
+   * @param {Snowflake} channel The id of the channel to send a message to
+   * @param {String} content The content to send
+   * @returns {Promise<Message>}
+   */
+  
+  say(channel, content) {
+     return this.createMessage(channel, content);
+  }
+  
+  /**
+   * Creates a message to a channel
+   * @param {Snowflake} channel The id of the channel to send a message to
+   * @param {String} content The content to send
+   * @returns {Promise<Message>}
+   */
+  
   createMessage(channel, content) {
     return this.client.rest.request("POST", ENDPOINTS.CHANNEL_MESSAGES(channel), {
       data: {
@@ -150,15 +184,43 @@ class Client extends EventEmitter {
     });
   }
 
-  /**
+   /**
    * This will start connecting to the gateway using the given bot token
-   * @deprecated
    * @param {String} token The token of the user
    * @returns {Void}
    */
-
+  
   start(token) {
-    console.warn(`Client#start() has been deprecated! Please use Client#initiate() instead.`);
+    return this.initiate(token);
+  }
+  
+   /**
+   * This will start connecting to the gateway using the given bot token
+   * @param {String} token The token of the user
+   * @returns {Void}
+   */
+  
+  login(token) {
+    return this.initiate(token);
+  }
+  
+   /**
+   * This will start connecting to the gateway using the given bot token
+   * @param {String} token The token of the user
+   * @returns {Void}
+   */
+  
+  connect(token) {
+    return this.initiate(token);
+  }
+  
+   /**
+   * This will start connecting to the gateway using the given bot token
+   * @param {String} token The token of the user
+   * @returns {Void}
+   */
+  
+  run(token) {
     return this.initiate(token);
   }
 
