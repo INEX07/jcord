@@ -17,6 +17,7 @@ class Channel {
 
     this.id = data.id;
     this.type = CHANNEL_TYPES[data.type];
+    this.mention = `<#${data.id}>`
   }
 
   toString() {
